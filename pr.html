@@ -1,93 +1,214 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+const treeCatagoryContiner = document.getElementById("treecatagorycontiner")
 
-  <!-- Google Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+const treeContainer= document.getElementById("treecontainer")
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+const treecountcontiner= document.getElementById("treecountcontiner")
 
-  <!-- DaisyUI + Tailwind -->
-  <link href="https://cdn.jsdelivr.net/npm/daisyui@5/dist/full.min.css" rel="stylesheet" type="text/css" />
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+let treecart=[]
 
-  <style>
-    .font-family {
-      font-family: "Inter", sans-serif;
-    }
-  </style>
-</head>
-<body class="font-family">
+const loadCategory = () =>{    
+fetch('https://openapi.programming-hero.com/api/categories')
+ .then(res => res.json())
+ .then(data =>{
+    // console.log(data.categories)
 
+    const categories = data.categories
+    treeShowCatagory(categories); 
 
- <!-- 2 Tree Cards -->
-    <div class="col-span-12 md:col-span-8">
-      <h2 class="text-xl font-semibold mb-4">Choose Your Trees</h2>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-
-       
-
-        
-
-       
-      </div>
-    </div>
-        <!-- Card -->
-    <div class="card bg-base-100 shadow-xl p-6">
-
-          <img src="./assets/hero-leaf1.png" alt="" class="max-w-[220px] mx-auto p-4 rounded-xl">
- 
-          <h2 class="font-bold text-[#1F2937]">Mango Tree</h2>
-
-          <p class="mt-2 text-[#1F293770] ">A tree producing delicious fruits, perfect for tropical gardens.</p>
-
-          <div class="py-3 flex justify-between items-center">
-
-            <button class="btn bg-[#15803D80] text-[#15803D] rounded-lg p-1">Fruit Tree</button>
-
-            <h3 class="text-[#1F2937] font-bold ">$500</h3>
-          </div>
-          <button class="btn bg-[#15803D] rounded-xl text-white w-full">Add to Cart</button>
-        </div>
-
-    <!-- 3 Cart -->
-    <div class="col-span-12 md:col-span-2">
-      <h2 class="font-bold mb-4">Your Cart</h2>
-      <p>No items added yet.</p>
-    </div>
-
-</body>
-</html>
-
-
-treeId = catagory id  --- news category p1 er 9.2 min 
-
-showtreesBycategory = shownewsbycatagory p1 er 13.34
-
-<!-- "status": true,
-"message": "successfully fetched plant data",
-"plants": {
-"id": 1,
-"image": "https://i.ibb.co.com/cSQdg7tf/mango-min.jpg",
-"name": "Mango Tree",
-"description": "A fast-growing tropical tree that produces delicious, juicy mangoes during summer. Its dense green canopy offers shade, while its sweet fruits are rich in vitamins and minerals.",
-"category": "Fruit Tree",
-"price": 500
+    
+ })
+ .catch(err=>{
+    console.log(err)
+ })
 }
-} -->
 
 
-2 ne kisu ta kaj korse 
-and 4 nea suru korse 
-<h2 class="text-[11px] font-bold">${item.}</h2>
 
-<div>
-  <h2 class="text-[11px] font-bold">${item.price}</h2>
-</div>
+
+const treeShowCatagory =(categories)=>{
+
+    categories.forEach(cata => {
+
+        // console.log(cata.category_name);
+
+           treeCatagoryContiner.innerHTML +=`
+           
+           <li id="${cata.id}" class= " cursor-pointer hover:text-white hover:bg-[#15803D]">${cata.category_name}</li>
+           `
+        
+    });
+
+}
+
+    treeCatagoryContiner.addEventListener("click", (e)=>{
+
+        const allli =document.querySelectorAll("li")
+        allli.forEach(li=>{
+            li.classList.remove("bg-[#15803D]")
+        })
+        // console.log(e.target.localName)
+       if(e.target.localName === "li"){
+         showloading()
+        // console.log(e.target.id)
+        e.target.classList.add("bg-[#15803D]")
+        treenewsByCategory(e.target.id)
+       }
+    })
+
+    // call cata ogri 
+        const callnewsByCategory = () =>{
+           showloading();
+        // console.log(treeId)
+        fetch("https://openapi.programming-hero.com/api/plants")
+         .then(res =>res.json())
+         .then(data => {
+
+            // console.log(data.plants)
+
+             showtreesBycategory(data.plants) 
+
+        })
+
+         .catch(err => {
+            console.log(err)
+     })
+    }
+
+
+    // call catagori 
+
+
+    const treenewsByCategory = (treeId) =>{
+         showloading()
+        // console.log(treeId)
+        fetch(`https://openapi.programming-hero.com/api/category/${treeId}`)
+         .then(res =>res.json())
+         .then(data => {
+
+            // console.log(data.plants)
+
+             showtreesBycategory(data.plants) 
+
+        })
+
+         .catch(err => {
+            console.log(err)
+     })
+    }
+
+    const showtreesBycategory = (articles)=>{
+        
+         treeContainer.innerHTML=""
+        // console.log(articles)
+        articles.forEach(article =>{
+            treeContainer.innerHTML+=`
+
+            <div id=${article.id} class="card bg-base-100 shadow-xl p-2">
+      <img src="${article.image}" alt="" class=" h-[185px] rounded-xl">
+      <h2 class="font-bold text-[#1F2937] my-1">${article.name}</h2>
+      <p class="mt-2 text-[#1F293770] text-[11px]">${article.description}</p>
+      <div id="billcount"  class="py-3 flex justify-between items-center">
+        <button class=" bg-[#15803D80] text-[#15803D] text-[11px] rounded-lg p-1">${article.category}</button>
+        <h3 class="text-[#1F2937] font-bold ">$${article.price}</h3>
+      </div>
+      <button id="addtocard" class="btn bg-[#15803D] rounded-xl text-white w-full">Add to Cart</button>
+    </div>
+
+            `
+
+        })
+
+    }
+
+
+
+ treeContainer.addEventListener("click",(e)=>{
+    // console.log(e.target.innerText)
+    if(e.target.innerText ==="Add to Cart"){
+        alert("tree has been added to the card")
+        handeltreecart(e)
+    }
+ })
+
+  const handeltreecart =(e)=>{
+   const card = e.target.parentNode;  
+   const title = card.children[1].innerText;  
+   const price = card.querySelector("h3").innerText;  
+   const id = card.id;   
+
+   treecart.push({
+      title: title,
+      price: price,
+      id: id
+   })
+
+   showtreecart(treecart)
+}
+
+ const showtreecart =(treecart)=>{
+    console.log(treecart)
+     treecountcontiner.innerHTML=""
+     treecart.forEach(item =>{
+        treecountcontiner.innerHTML +=`
+         <div class=" shadow-sm my-3 p-2 ">
+       <div class="flex justify-between">
+        <h1 class="text-[11px] font-bold">${item.title}</h1>
+        
+         <button onClick="handeldeletebookmark('${item.id}')"class=""> ❌</button>
+         
+         
+         </div>
+         <div>
+        <h2 class="text-[11px] font-bold">${item.price}</h2>
+        </div>
+        </div>
+        
+        `
+     })
+     
+     showTotal()
+ }
+
+ 
+
+   const handeldeletebookmark=(treeid)=>{
+    const filterBookmarkTree=treecart.filter(a => a.id !== treeid)
+
+    // console.log(filterBookmarkTree)
+
+    treecart = filterBookmarkTree
+
+    showtreecart(treecart )
+
+   }
+
+   const showTotal = () => {
+   let total = 0
+   for (const item of treecart) {
+    const priceNumber = Number(item.price.replace('$', ''));
+    total += priceNumber;
+   }
+  document.getElementById("totaltk").innerText = ` Total:  $${total}`
+ }
+
+
+ const showloading=()=>{
+   treeContainer.innerHTML = `
+    <div class="flex justify-center items-center col-span-12 h-[200px]">
+      <span class="loading loading-bars loading-xl"></span>
+      
+    </div>
+  `;
+ }
+   
+
+
+loadCategory()
+
+callnewsByCategory()
+
+
+ 
+
+
+

@@ -6,6 +6,43 @@ const treecountcontiner= document.getElementById("treecountcontiner")
 
 let treecart=[]
 
+const loadtreeData = async(id) =>{
+   const url = `https://openapi.programming-hero.com/api/plant/${id} `
+   const res = await fetch(url);
+   const ditels = await res.json()
+   displaytreeditels(ditels)
+}
+
+
+const displaytreeditels = (tree) => {
+   const plant = tree.plants 
+
+  const diteltreeBox = document.getElementById("ditels-continer");
+
+  diteltreeBox.innerHTML = ` 
+    <div class="space-y-3">
+       <h3 class="text-lg font-bold">${ plant.name}</h3>
+      <img src="${ plant.image}" alt="" class="w-full h-48 object-cover rounded-lg">
+      <p><span class="font-bold">Category:</span> ${ plant.category}</p>
+      <p><span class="font-bold">Price:</span> $${ plant.price}</p>
+      <p><span class="font-bold">Description:</span> ${ plant.description}</p>
+    </div>
+  `;
+
+  document.getElementById("my_modal_5").showModal();
+};
+
+
+
+
+
+
+
+
+
+
+
+
 const loadCategory = () =>{    
 fetch('https://openapi.programming-hero.com/api/categories')
  .then(res => res.json())
@@ -75,6 +112,7 @@ const treeShowCatagory =(categories)=>{
     }
 
 
+
     // call catagori 
 
 
@@ -105,7 +143,7 @@ const treeShowCatagory =(categories)=>{
 
             <div id=${article.id} class="card bg-base-100 shadow-xl p-2">
       <img src="${article.image}" alt="" class=" h-[185px] rounded-xl">
-      <h2 class="font-bold text-[#1F2937] my-1">${article.name}</h2>
+      <div onclick="loadtreeData(${article.id}) " class=""><h2 class="font-bold text-[#1F2937] my-1 ">${article.name}</h2></div>
       <p class="mt-2 text-[#1F293770] text-[11px]">${article.description}</p>
       <div id="billcount"  class="py-3 flex justify-between items-center">
         <button class=" bg-[#15803D80] text-[#15803D] text-[11px] rounded-lg p-1">${article.category}</button>
@@ -196,7 +234,7 @@ const treeShowCatagory =(categories)=>{
    treeContainer.innerHTML = `
     <div class="flex justify-center items-center col-span-12 h-[200px]">
       <span class="loading loading-bars loading-xl"></span>
-      
+
     </div>
   `;
  }
