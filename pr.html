@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+
+  <!-- DaisyUI + Tailwind -->
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@5/dist/full.min.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <style>
+    .font-family {
+      font-family: "Inter", sans-serif;
+    }
+  </style>
+</head>
+<body class="font-family">
+
+
+ <!-- 2 Tree Cards -->
+    <div class="col-span-12 md:col-span-8">
+      <h2 class="text-xl font-semibold mb-4">Choose Your Trees</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <!-- Card -->
+
+        <div class="card bg-base-100 shadow-xl p-6">
+
+          <img src="./assets/hero-leaf1.png" alt="" class="max-w-[220px] mx-auto p-4 rounded-xl">
+ 
+          <h2 class="font-bold text-[#1F2937]">Mango Tree</h2>
+
+          <p class="mt-2 text-[#1F293770] ">A tree producing delicious fruits, perfect for tropical gardens.</p>
+
+          <div class="py-3 flex justify-between items-center">
+
+            <button class="btn bg-[#15803D80] text-[#15803D] rounded-lg p-1">Fruit Tree</button>
+
+            <h3 class="text-[#1F2937] font-bold ">$500</h3>
+          </div>
+          <button class="btn bg-[#15803D] rounded-xl text-white w-full">Add to Cart</button>
+        </div>
+
+        <!-- Repeat same card -->
+       <div class="card bg-base-100 shadow-xl p-6">
+
+          <img src="./assets/hero-leaf1.png" alt="" class="max-w-[220px] mx-auto p-4 rounded-xl">
+ 
+          <h2 class="font-bold text-[#1F2937]">Mango Tree</h2>
+
+          <p class="mt-2 text-[#1F293770] ">A tree producing delicious fruits, perfect for tropical gardens.</p>
+
+          <div class="py-3 flex justify-between items-center">
+
+            <button class="btn bg-[#15803D80] text-[#15803D] rounded-lg p-1">Fruit Tree</button>
+
+            <h3 class="text-[#1F2937] font-bold ">$500</h3>
+          </div>
+          <button class="btn bg-[#15803D] rounded-xl text-white w-full">Add to Cart</button>
+        </div>
+        <div class="card bg-base-100 shadow-xl p-6">
+
+          <img src="./assets/hero-leaf1.png" alt="" class="max-w-[220px] mx-auto p-4 rounded-xl">
+ 
+          <h2 class="font-bold text-[#1F2937]">Mango Tree</h2>
+
+          <p class="mt-2 text-[#1F293770] ">A tree producing delicious fruits, perfect for tropical gardens.</p>
+
+          <div class="py-3 flex justify-between items-center">
+
+            <button class="btn bg-[#15803D80] text-[#15803D] rounded-lg p-1">Fruit Tree</button>
+
+            <h3 class="text-[#1F2937] font-bold ">$500</h3>
+          </div>
+          <button class="btn bg-[#15803D] rounded-xl text-white w-full">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 Cart -->
+    <div class="col-span-12 md:col-span-2">
+      <h2 class="font-bold mb-4">Your Cart</h2>
+      <p>No items added yet.</p>
+    </div>
+
+</body>
+</html>
