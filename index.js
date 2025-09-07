@@ -104,7 +104,7 @@ const treeShowCatagory =(categories)=>{
       <img src="${article.image}" alt="" class=" h-[185px] rounded-xl">
       <h2 class="font-bold text-[#1F2937] my-1">${article.name}</h2>
       <p class="mt-2 text-[#1F293770] text-[11px]">${article.description}</p>
-      <div  class="py-3 flex justify-between items-center">
+      <div id="billcount"  class="py-3 flex justify-between items-center">
         <button class=" bg-[#15803D80] text-[#15803D] text-[11px] rounded-lg p-1">${article.category}</button>
         <h3 class="text-[#1F2937] font-bold ">$${article.price}</h3>
       </div>
@@ -127,23 +127,20 @@ const treeShowCatagory =(categories)=>{
     }
  })
 
- const handeltreecart =(e)=>{
- console.log(e.target.parentNode)
-    // console.log("btn click")
-        const title = e.target.parentNode.children[1] .innerText
-        // const bill = e.target.parentNode.children[] .innerText
-        const id =e.target.parentNode.id
-        // console.log(id)
+  const handeltreecart =(e)=>{
+   const card = e.target.parentNode;  
+   const title = card.children[1].innerText;  
+   const price = card.querySelector("h3").innerText;  
+   const id = card.id;   
 
-       treecart.push({
-         title: title,
-         id: id
-       })
-         console.log( treecart)
+   treecart.push({
+      title: title,
+      price: price,
+      id: id
+   })
 
-         showtreecart(treecart)
-
- }
+   showtreecart(treecart)
+}
 
  const showtreecart =(treecart)=>{
     console.log(treecart)
@@ -153,15 +150,23 @@ const treeShowCatagory =(categories)=>{
          <div class=" shadow-sm my-3 p-2 ">
        <div class="flex justify-between">
         <h1 class="text-[11px] font-bold">${item.title}</h1>
-         <h2 class="text-[11px] font-bold">${item}</h2>
+        
          <button onClick="handeldeletebookmark('${item.id}')"class=""> ❌</button>
+         
+         
          </div>
+         <div>
+        <h2 class="text-[11px] font-bold">${item.price}</h2>
+        </div>
         </div>
         
         `
      })
-
+     
+     showTotal()
  }
+
+ 
 
    const handeldeletebookmark=(treeid)=>{
     const filterBookmarkTree=treecart.filter(a => a.id !== treeid)
@@ -173,6 +178,16 @@ const treeShowCatagory =(categories)=>{
     showtreecart(treecart )
 
    }
+
+   const showTotal = () => {
+   let total = 0
+   for (const item of treecart) {
+    const priceNumber = Number(item.price.replace('$', ''));
+    total += priceNumber;
+   }
+  document.getElementById("totaltk").innerText = ` Total:  $${total}`
+ }
+   
 
 
 loadCategory()
