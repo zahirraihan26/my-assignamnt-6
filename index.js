@@ -49,9 +49,30 @@ const treeShowCatagory =(categories)=>{
        }
     })
 
+    // call cata ogri 
+        const callnewsByCategory = () =>{
+        // console.log(treeId)
+        fetch("https://openapi.programming-hero.com/api/plants")
+         .then(res =>res.json())
+         .then(data => {
+
+            // console.log(data.plants)
+
+             showtreesBycategory(data.plants) 
+
+        })
+
+         .catch(err => {
+            console.log(err)
+     })
+    }
+
+
+    // call catagori 
+
 
     const treenewsByCategory = (treeId) =>{
-        console.log(treeId)
+        // console.log(treeId)
         fetch(`https://openapi.programming-hero.com/api/category/${treeId}`)
          .then(res =>res.json())
          .then(data => {
@@ -73,12 +94,12 @@ const treeShowCatagory =(categories)=>{
         articles.forEach(article =>{
             treeContainer.innerHTML+=`
 
-            <div class="card bg-base-100 shadow-xl p-6">
-      <img src="${article.image}" alt="" class=" rounded-xl">
-      <h2 class="font-bold text-[#1F2937]">${article.name}</h2>
-      <p class="mt-2 text-[#1F293770]">${article.description}</p>
+            <div class="card bg-base-100 shadow-xl p-2">
+      <img src="${article.image}" alt="" class=" h-[185px] rounded-xl">
+      <h2 class="font-bold text-[#1F2937] my-1">${article.name}</h2>
+      <p class="mt-2 text-[#1F293770] text-[11px]">${article.description}</p>
       <div class="py-3 flex justify-between items-center">
-        <button class="btn bg-[#15803D80] text-[#15803D] rounded-lg p-1">${article.category}</button>
+        <button class=" bg-[#15803D80] text-[#15803D] text-[11px] rounded-lg p-1">${article.category}</button>
         <h3 class="text-[#1F2937] font-bold ">$${article.price}</h3>
       </div>
       <button class="btn bg-[#15803D] rounded-xl text-white w-full">Add to Cart</button>
@@ -96,6 +117,11 @@ const treeShowCatagory =(categories)=>{
 
 
 loadCategory()
+
+callnewsByCategory()
+
+
+ 
 
 
 
