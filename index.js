@@ -48,6 +48,7 @@ const treeShowCatagory =(categories)=>{
         })
         // console.log(e.target.localName)
        if(e.target.localName === "li"){
+         showloading()
         // console.log(e.target.id)
         e.target.classList.add("bg-[#15803D]")
         treenewsByCategory(e.target.id)
@@ -56,6 +57,7 @@ const treeShowCatagory =(categories)=>{
 
     // call cata ogri 
         const callnewsByCategory = () =>{
+           showloading();
         // console.log(treeId)
         fetch("https://openapi.programming-hero.com/api/plants")
          .then(res =>res.json())
@@ -77,6 +79,7 @@ const treeShowCatagory =(categories)=>{
 
 
     const treenewsByCategory = (treeId) =>{
+         showloading()
         // console.log(treeId)
         fetch(`https://openapi.programming-hero.com/api/category/${treeId}`)
          .then(res =>res.json())
@@ -186,6 +189,16 @@ const treeShowCatagory =(categories)=>{
     total += priceNumber;
    }
   document.getElementById("totaltk").innerText = ` Total:  $${total}`
+ }
+
+
+ const showloading=()=>{
+   treeContainer.innerHTML = `
+    <div class="flex justify-center items-center col-span-12 h-[200px]">
+      <span class="loading loading-bars loading-xl"></span>
+      
+    </div>
+  `;
  }
    
 
